@@ -1,0 +1,45 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron" style="background-color:#1daeff !important;">
+    <h2 style="color:#fff;">Spam Detection Machine Learning Application</h2>      
+    <p style="color:#fff;">Good to see you again, User!</p>
+  </div>
+  <p>SpamML has predicted whether your email is spam or not. See below!</p>
+</div>
+
+
+<div class="card text-center">
+  <div class="card-header">
+    Prediction
+  </div>
+  <div class="card-body" style="background-color:#1daeff;">
+    <hr/>
+    <p class="card-text"><div class="alert alert-danger" role="alert">
+</div></p>
+
+<!-- Main ML Prediction Display Here -->
+    {% if prediction ==  1%}
+    <p class="card-text"><div class="alert alert-danger" role="alert">Spam</div></p>
+    <a href="#" class="btn btn-danger">Your email is spam</a>
+    
+    {% elif prediction == 0%}
+	<p class="card-text"><div class="alert alert-danger" role="alert">Not Spam</div></p>
+    <a href="#" class="btn btn-primary">Your email is not spam</a>
+    {% endif%}
+  </div>
+
+<!-- Main ML Prediction Display Ends Here -->
+  <div class="card-footer text-muted">
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}

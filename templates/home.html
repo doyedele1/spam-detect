@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>SpamML Homepage</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head> -->
+
+<div class="container">
+  <div class="jumbotron" style="background-color:#1daeff !important;">
+    <h2 style="color:#fff;">Spam Detection Machine Learning Application</h2>      
+    <p style="color:#fff;">Welcome User!</p>
+  </div>
+  <p>Simply paste the body of the email in the text area below and the app predicts whether your email is spam or not.</p>
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+      
+<!-- Main Input For Receiving Query to our ML -->	
+      	<form action="{{ url_for('predict')}}" method="POST">
+			<input type="text" name="comment" placeholder="Email content here...">
+			<button type="submit" class="btn btn-primary">Run spam analysis</button>
+			</form>
+
+<!-- Main Input For Receiving Query to our ML --> 
+
+
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block styles %}
+{{super()}} <!-- Allows Javascripts and other styles to be inclusive in bootstrap -->
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
