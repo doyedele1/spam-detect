@@ -49,7 +49,7 @@ def predict():
 
 # preds = clf.predict(x_test)
     # Saved machine learning model
-    clf = pickle.load(open('text-classifier.mdl', 'rb'))
+    clf = pickle.load(open('text-classifier.mdl', 'rb'), protocol=4)
     d = make_dict()
 
     # Receives input query from form
@@ -65,6 +65,6 @@ def predict():
         # print(["Not Spam", "Spam"][res[0]])
         # print(res)
     return render_template('result.html', prediction = res)
-         
+        
 if __name__== '__main__':
     app.run(debug=True)

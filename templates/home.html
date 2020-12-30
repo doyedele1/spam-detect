@@ -22,7 +22,7 @@
       <div class="panel-body">
       
 <!-- Main Input For Receiving Query to our ML -->	
-      	<form action="{{ url_for('predict')}}" method="POST">
+      <form action="{{ url_for('predict')}}" method="POST">
 			<input type="text" name="comment" placeholder="Email content here...">
 			<button type="submit" class="btn btn-primary">Run spam analysis</button>
 			</form>
