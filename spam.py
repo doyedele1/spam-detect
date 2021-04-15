@@ -15,7 +15,7 @@ def make_dict():
     words = []
     pickle = len(emails)
     for email in emails:
-        f = open(email, errors="ignore")
+        f = open(email)
         blob = f.read()
         words += blob.split(" ")
         pickle = pickle - 1
@@ -40,7 +40,7 @@ def make_dataset(dictionary):
 
     for email in emails:
         data = []
-        f = open(email, errors="ignore")
+        f = open(email)
         words = f.read().split(' ')
         for entry in dictionary:
             data.append(words.count(entry[0]))
@@ -65,7 +65,7 @@ clf = MultinomialNB()
 clf.fit(x_train, y_train)
 
 preds = clf.predict(x_test)
-print(accuracy_score(y_test, preds))
+print accuracy_score(y_test, preds)
 
 # Save the model to disk
 filename = 'text-classifier.mdl'
