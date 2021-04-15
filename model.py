@@ -11,7 +11,7 @@ app = Flask(__name__)
 Bootstrap(app)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
 
@@ -50,11 +50,6 @@ def predict():
             features.append(inp.count(word[0]))
         res = clf.predict([features])
     return render_template('result.html', prediction = res)
-
-@app.errorhandler(404)
-def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('404.html'), 404
 
 if __name__== '__main__':
     app.run(debug=True)
