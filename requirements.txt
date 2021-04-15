@@ -1,5 +1,4 @@
-fastapi==0.58.1
-uvicorn==0.11.5
-
-
+Flask==1.1.1
+flask-bootstrap==2.3.2.2
+gunicorn==19.9.0
 scikit-learn==0.24.1
