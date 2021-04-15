@@ -1,45 +1,65 @@
 {% extends "bootstrap/base.html" %}
 {% block content %}
 
-<div class="container">
-  <div class="jumbotron" style="background-color:#1daeff !important;">
-    <h2 style="color:#fff;">Spam Detection Machine Learning Application</h2>      
-    <p style="color:#fff;">Good to see you again, User!</p>
-  </div>
-  <p>SpamML has predicted whether your email is spam or not. See below!</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>SpamML Result</title>
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+      />
+      <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="glass">
+        <div class="dashboard">
+          <div class="user">
+            <img src="/static/avatar.svg" alt="" />
+            <h3>John Doe</h3>
+            <p>johndoe@gmail.com</p>
+          </div>
+          <div class="links">
+            <div class="link">
+              <img src="/static/twitch.png" alt="" />
+              <h2><a href="#">Home</a></h2>
+            </div>
+            <div class="link">
+              <img src="/static/steam.png" alt="" />
+              <h2><a href="about.html">About</a></h2>
+            </div>
+            <div class="link">
+              <img src="/static/library.png" alt="" />
+              <h2><a href="docs.html">Docs</a></h2>
+            </div>
+          </div>
+          <div class="pro">
+            <h2>
+              <a href="#">Get started for free</a>
+            </h2>
+          </div>
+        </div>
+
+        <div class="games text-center">
+          <h1>Hi there!</h1>
+          <p class="text-nowrap">Our spam detection model have analyzed your email. Your result will appear below!</p>
+          {% if prediction ==  1%}
+          <h1 class="text-nowrap text-danger">Your email is spam</h1>
+          {% elif prediction == 0%}
+          <h1 class="text-nowrap">Your email is not spam</h1>
+          {% endif%}
+
+        </div>
+      </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+  </body>
+</html>
 
 
-<div class="card text-center">
-  <div class="card-header">
-    Prediction
-  </div>
-  <div class="card-body" style="background-color:#1daeff;">
-    <hr/>
-    <p class="card-text"><div class="alert alert-danger" role="alert">
-</div></p>
-
-<!-- Main ML Prediction Display Here -->
-    {% if prediction ==  1%}
-    <p class="card-text"><div class="alert alert-danger" role="alert">Spam</div></p>
-    <a href="#" class="btn btn-danger">Your email is spam</a>
-    
-    {% elif prediction == 0%}
-	<p class="card-text"><div class="alert alert-danger" role="alert">Not Spam</div></p>
-    <a href="#" class="btn btn-primary">Your email is not spam</a>
-    {% endif%}
-  </div>
-
-<!-- Main ML Prediction Display Ends Here -->
-  <div class="card-footer text-muted">
-  </div>
-</div>
-
-
-{% endblock %}
-
-{% block styles %}
-{{super()}}
-<link rel="stylesheet"
-      href="{{url_for('.static', filename='css/styles.css')}}">
 {% endblock %}
