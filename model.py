@@ -1,55 +1,75 @@
-from flask import Flask, render_template, url_for, request
-from flask_bootstrap import Bootstrap
-
-# ML Packages
 import os
-import pickle
-from sklearn import *
 from collections import Counter
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split as tts
+from sklearn.metrics import accuracy_score
+import pickle
 
-app = Flask(__name__)
-Bootstrap(app)
+# Make a dictionary of the 3000 most common words
+def make_dict():
+    direc = "emails/"
+    files = os.listdir(direc)
+    
+    emails = [direc + email for email in files]
+    
+    words = []
+    pickle = len(emails)
+    for email in emails:
+        f = open(email)
+        blob = f.read()
+        words += blob.split(" ")
+        pickle = pickle - 1
+        
+    for i in range(len(words)):
+        if not words[i].isalpha():
+            words[i] = ""
+
+    dictionary = Counter(words)
+    del dictionary[""]
+    return dictionary.most_common(3000)
+
+# Prepare the dataset using feature vectorization
+def make_dataset(dictionary):
+    direc = "emails/"
+    files = os.listdir(direc)
+    
+    emails = [direc + email for email in files]
+    feature_set = []
+    labels = []
+    pickle = len(emails)
+
+    for email in emails:
+        data = []
+        f = open(email)
+        words = f.read().split(' ')
+        for entry in dictionary:
+            data.append(words.count(entry[0]))
+        feature_set.append(data)
+        
+        if "ham" in email:
+            labels.append(0)
+        if "spam" in email:
+            labels.append(1)
+        pickle = pickle - 1
+    return feature_set, labels
 
 
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    return render_template('home.html')
+d = make_dict()
+features, labels = make_dataset(d)
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    def make_dict():
-        direc = "emails/"
-        files = os.listdir(direc)
-        emails = [direc + email for email in files]
-        words = []
-        pickle = len(emails)
+# Percentages of training and test data
+x_train, x_test, y_train, y_test = tts(features, labels, test_size=0.2)
 
-        for email in emails:
-            f = open(email)
-            blob = f.read()
-            words += blob.split(" ")
-            pickle = pickle - 1
+# Train the model using a built-in classifier
+clf = MultinomialNB()
+clf.fit(x_train, y_train)
 
-        for i in range(len(words)):
-            if not words[i].isalpha():
-                words[i] = ""
+preds = clf.predict(x_test)
+# print accuracy_score(y_test, preds)
 
-        dictionary = Counter(words)
-        del dictionary[""]
-        return dictionary.most_common(3000)
+# Save the model to disk
+filename = 'text-classifier.mdl'
+pickle.dump(clf, open(filename, 'wb'))
 
-    # Saved machine learning model
-    clf = pickle.load(open("text-classifier.mdl", "rb"))
-    d = make_dict()
-
-    if request.method == 'POST':
-        inp = request.form['inp']
-        # data_in = [[email]]
-        features = []
-        for word in d:
-            features.append(inp.count(word[0]))
-        res = clf.predict([features])
-    return render_template('result.html', prediction = res)
-
-if __name__== '__main__':
-    app.run(debug=True)
+# Load the model from disk
+clf = pickle.load(open(filename, 'rb'))

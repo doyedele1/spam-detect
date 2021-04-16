@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About SpamML</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="glass">
+        <div class="dashboard">
+          <div class="user">
+            <img src="/static/avatar.svg" alt="" />
+            <h3>John Doe</h3>
+            <p>johndoe@gmail.com</p>
+          </div>
+          <div class="links">
+            <div class="link">
+              <img src="/static/twitch.png" alt="" />
+              <h2><a href="{{url_for('home')}}">Home</a></h2>
+            </div>
+            <div class="link">
+              <img src="/static/steam.png" alt="" />
+              <h2><a>About</a></h2>
+            </div>
+            <div class="link">
+              <img src="/static/library.png" alt="" />
+              <h2><a href="https://github.com/doyedele1/SpamML" target="_blank">Docs</a></h2>
+            </div>
+          </div>
+          <div class="pro">
+            <h2>
+              <a href="#">Get started for free</a>
+            </h2>
+          </div>
+        </div>
+        <div class="games">
+          <div class="status">
+            <h1>About SpamML</h1>
+                <p>
+                  SpamML is a single-page web application binary-classifier system based on the use of supervised machine learning algorithms and several other data preprocessing techniques. The machine learning based spam detector runs on an asynchronous, non-blocking, multiplexing I/O HTTP web server. The web interface is initially built with HTML, CSS & PHP, before it was refactored in ReactJS which enables the client to communicate with the HTTP server which runs on Flask. The system collects emails from the user through a large textarea where suspicious emails can be pasted, runs the spam detection analysis and alerts the user on the potential of the email being spam or not. The database used was trained with a business email dataset using the machine learning data preprocessing techniques in Python. Over 5000 pre-labelled emails were used to build the classifier. The model uses an adaptation of the Naive Bayes algorithm to compute the probability of the email being spam or ham.
+                </p>
+          </div>
+          <div class="card">
+            <div class="card-info">
+              <p>
+                SpamML is open-sourced. Click <a href="https://github.com/doyedele1/SpamML" target="_blank" style="text-decoration: none; color: #426696">here</a> to view the GitHub repository.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+    </main>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+  </body>
+</html>
