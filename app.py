@@ -2,9 +2,7 @@
 from flask import Flask, request, jsonify
 from sklearn.externals import joblib
 import traceback
-import numpy as np
 import pickle
-import pandas as pd
 from model import make_dict
 
 app = Flask(__name__)
